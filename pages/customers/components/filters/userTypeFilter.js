@@ -43,12 +43,6 @@ const UserTypeFilter = ({ toggleFilter }) => {
               }
               label="Normal"
             />
-            <FormControlLabel
-              control={
-                <Checkbox value="hard" onChange={() => toggleFilter("hard")} />
-              }
-              label="Trabalhoso"
-            />
           </FormGroup>
         </article>
       </div>

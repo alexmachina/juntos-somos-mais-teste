@@ -37,7 +37,7 @@ const Controls = ({ currentPage, totalPages = 1, setCurrentPage }) => {
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep === 5}
+              disabled={activeStep === totalPages - 1}
             >
               Next
               <KeyboardArrowRight />

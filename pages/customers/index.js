@@ -36,8 +36,10 @@ const Customers = ({ data }) => {
     const from = currentPage * resultsPerPage;
     const to = from + resultsPerPage;
     const filtered = applyAllFilters(data, regionFilters, customerFilters);
-    setResults(filtered.slice(from, to));
-    setTotalPages(results.length / resultsPerPage);
+    const nextResults = filtered.slice(from, to);
+    const nextTotalPages = filtered.length / resultsPerPage;
+    setResults(nextResults);
+    setTotalPages(Math.ceil(nextTotalPages));
   }, [regionFilters, currentPage, customerFilters]);
 
   const toggleRegionFilter = filter => {
