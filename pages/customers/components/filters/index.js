@@ -13,14 +13,14 @@ const useStyles = makeStyles({
   }
 });
 
-const Filters = ({ toggleFilter }) => {
+const Filters = ({ toggleRegionFilter, toggleCustomerFilter }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <UserTypeFilter toggleFilter={toggleFilter} />
+        <UserTypeFilter toggleFilter={toggleCustomerFilter} />
       </Grid>
       <Grid item xs={12}>
-        <UserRegionFilter toggleFilter={toggleFilter} />
+        <UserRegionFilter toggleFilter={toggleRegionFilter} />
       </Grid>
     </Grid>
   );

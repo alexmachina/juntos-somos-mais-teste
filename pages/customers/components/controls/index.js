@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Controls = ({ currentPage, setCurrentPage }) => {
+const Controls = ({ currentPage, totalPages = 1, setCurrentPage }) => {
   const classes = useStyles();
 
   const maxSteps = 10;
@@ -29,7 +29,7 @@ const Controls = ({ currentPage, setCurrentPage }) => {
       <Grid item xs={12} className={classes.stepperContainer}>
         <MobileStepper
           variant="dots"
-          steps={6}
+          steps={totalPages}
           position="static"
           activeStep={activeStep}
           className={classes.root}

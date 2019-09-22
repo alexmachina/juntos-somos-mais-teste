@@ -9,8 +9,9 @@ import Results from "./components/results";
 import Filters from "./components/filters";
 import Controls from "./components/controls";
 import { fetchData } from "../../store/api";
-import regions from "../../store/regions";
 import fetch from "isomorphic-unfetch";
+import { applyAllFilters } from "../../store/filters";
+
 const useStyles = makeStyles({
   root: {},
   container: {
@@ -23,34 +24,39 @@ const useStyles = makeStyles({
 });
 
 const resultsPerPage = 10;
-
-const applyFilters = (data, filters) => {
-  return data.filter(customer => {
-    const statesToFilterFrom = filters
-      .toJS()
-      .reduce((acc, filter) => [...acc, ...regions[filter]], []);
-
-    const exists = statesToFilterFrom.includes(customer.location.state);
-
-    return exists;
-  });
-};
 const Customers = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [filters, setFilters] = useState(Set());
+  const [totalPages, setTotalPages] = useState(0);
+  const [regionFilters, setRegionFilters] = useState(Set());
+  const [customerFilters, setCustomerFilters] = useState(Set());
   const [results, setResults] = useState(data);
 
+  console.log("totalPages", totalPages);
   useEffect(() => {
     const from = currentPage * resultsPerPage;
     const to = from + resultsPerPage;
-    const filtered = applyFilters(data, filters);
+    const filtered = applyAllFilters(data, regionFilters, customerFilters);
     setResults(filtered.slice(from, to));
-  }, [filters, currentPage]);
+    setTotalPages(results.length / resultsPerPage);
+  }, [regionFilters, currentPage, customerFilters]);
 
-  const toggleFilter = filter =>
-    setFilters(
-      filters.has(filter) ? filters.delete(filter) : filters.add(filter)
+  const toggleRegionFilter = filter => {
+    setCurrentPage(0);
+    setRegionFilters(
+      regionFilters.has(filter)
+        ? regionFilters.delete(filter)
+        : regionFilters.add(filter)
     );
+  };
+
+  const toggleCustomerFilter = filter => {
+    setCurrentPage(0);
+    setCustomerFilters(
+      customerFilters.has(filter)
+        ? customerFilters.delete(filter)
+        : customerFilters.add(filter)
+    );
+  };
 
   const classes = useStyles();
   return (
@@ -61,12 +67,19 @@ const Customers = ({ data }) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Controls currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Controls
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </Grid>
       <Grid item xs={12} className={classes.content}>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={3}>
-            <Filters toggleFilter={toggleFilter} />
+            <Filters
+              toggleCustomerFilter={toggleCustomerFilter}
+              toggleRegionFilter={toggleRegionFilter}
+            />
           </Grid>
           <Grid item xs={12} sm={12} md={9}>
             <Results data={results} />

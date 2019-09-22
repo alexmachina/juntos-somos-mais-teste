@@ -1,4 +1,5 @@
 import fetch from "isomorphic-unfetch";
+import shortid from "shortid";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import {
   cond,
@@ -44,7 +45,9 @@ const transform = entry => {
     registered: omitAge
   });
 
+  const appendId = obj => Object.assign({}, obj, { id: shortid.generate() });
   const transformEntry = compose(
+    appendId,
     transformGenderAndOmitAge,
     removeOldPhoneFields,
     addNewPhoneFields
