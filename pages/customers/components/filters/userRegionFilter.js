@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 });
 
-const UserTypeFilter = () => {
+const UserTypeFilter = ({ toggleFilter }) => {
   const classes = useStyles();
 
   return (
@@ -26,22 +26,47 @@ const UserTypeFilter = () => {
         <article>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox value="norte" />}
+              control={
+                <Checkbox
+                  value="norte"
+                  onChange={() => toggleFilter("norte")}
+                />
+              }
               label="Norte"
             />
             <FormControlLabel
-              control={<Checkbox value="nordeste" />}
+              control={
+                <Checkbox
+                  value="nordeste"
+                  onChange={() => toggleFilter("nordeste")}
+                />
+              }
               label="Nordeste"
             />
             <FormControlLabel
-              control={<Checkbox value="centro-oeste" />}
+              control={
+                <Checkbox
+                  value="centro-oeste"
+                  onChange={() => toggleFilter("centroOeste")}
+                />
+              }
               label="Centro Oeste"
             />
             <FormControlLabel
-              control={<Checkbox value="sudeste" />}
+              control={
+                <Checkbox
+                  value="sudeste"
+                  onChange={() => toggleFilter("sudeste")}
+                />
+              }
               label="Sudeste"
             />
-            <FormControlLabel control={<Checkbox value="sul" />} label="Sul" />
+            <FormControlLabel
+              control={
+                <Checkbox value="sul" onChange={() => toggleFilter("sul")} />
+              }
+              label="Sul"
+            />
           </FormGroup>
         </article>
       </div>
