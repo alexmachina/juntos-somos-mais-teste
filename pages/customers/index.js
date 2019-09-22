@@ -7,7 +7,8 @@ import UserTypeFilter from "./components/filters/userTypeFilter";
 import Results from "./components/results";
 import Filters from "./components/filters";
 import Controls from "./components/controls";
-
+import { fetchData } from "../../store/api";
+import fetch from "isomorphic-unfetch";
 const useStyles = makeStyles({
   root: {},
   container: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Customers = () => {
+const Customers = ({ data }) => {
   const classes = useStyles();
   return (
     <Grid container className={classes.container}>
@@ -29,12 +30,12 @@ const Customers = () => {
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.content}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={12} md={3}>
             <Filters />
           </Grid>
-          <Grid item xs={12} sm={8}>
-            <Results />
+          <Grid item xs={12} sm={12} md={9}>
+            <Results data={data} />
           </Grid>
         </Grid>
       </Grid>

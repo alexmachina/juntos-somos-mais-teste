@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
+import Head from "next/head";
+import fetch from "isomorphic-unfetch";
+
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import fetch from "isomorphic-unfetch";
-import { Provider } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
+
+import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import rootReducer from "../store/reducers";
+
 import Header from "../components/header/index";
 import Customers from "./customers";
-import Head from "next/head";
+import { fetchData } from "../store/api";
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +28,7 @@ const store = createStore(
   applyMiddleware(thunkMiddleware)
 );
 
-const Home = () => {
+const Home = ({ data }) => {
   const classes = useStyles();
   return (
     <Provider store={store}>
@@ -43,11 +47,16 @@ const Home = () => {
           <Header />
         </Grid>
         <Grid item xs={12}>
-          <Customers />
+          <Customers data={data} />
         </Grid>
       </Container>
     </Provider>
   );
+};
+
+Home.getInitialProps = async () => {
+  const data = await fetchData();
+  return { data };
 };
 
 export default Home;

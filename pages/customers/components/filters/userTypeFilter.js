@@ -21,7 +21,7 @@ const UserTypeFilter = () => {
     <Paper className={classes.filters}>
       <div>
         <header>
-          <Typography variant="h6">Filtrar por usuário</Typography>
+          <Typography variant="h6">Usuário</Typography>
         </header>
         <article>
           <FormGroup>
