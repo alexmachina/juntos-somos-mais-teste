@@ -17,13 +17,13 @@ const useStyles = makeStyles({
   }
 });
 
-const Controls = () => {
+const Controls = ({ currentPage, setCurrentPage }) => {
   const classes = useStyles();
 
   const maxSteps = 10;
-  const activeStep = 1;
-  const handleBack = () => {};
-  const handleNext = () => {};
+  const activeStep = currentPage;
+  const handleBack = () => setCurrentPage(currentPage - 1);
+  const handleNext = () => setCurrentPage(currentPage + 1);
   return (
     <Grid container className={classes.container} justify="center">
       <Grid item xs={12} className={classes.stepperContainer}>

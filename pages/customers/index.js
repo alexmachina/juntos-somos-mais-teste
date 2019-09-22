@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
@@ -20,7 +20,15 @@ const useStyles = makeStyles({
   }
 });
 
+const resultsPerPage = 10;
+
 const Customers = ({ data }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const from = currentPage * resultsPerPage;
+  const to = from + resultsPerPage;
+  const slice = data.slice(from, to);
+
   const classes = useStyles();
   return (
     <Grid container className={classes.container}>
@@ -29,18 +37,18 @@ const Customers = ({ data }) => {
           Usuários Por Região
         </Typography>
       </Grid>
+      <Grid item xs={12}>
+        <Controls currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      </Grid>
       <Grid item xs={12} className={classes.content}>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={3}>
             <Filters />
           </Grid>
           <Grid item xs={12} sm={12} md={9}>
-            <Results data={data} />
+            <Results data={slice} />
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Controls></Controls>
       </Grid>
     </Grid>
   );
