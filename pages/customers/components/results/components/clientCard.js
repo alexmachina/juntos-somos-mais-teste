@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
@@ -45,7 +46,8 @@ const ClientCard = ({ avatar, name, city, street, postcode, state }) => {
 };
 
 const displayStreet = street => {
-  const number = street.match(/\d+/)[0];
+  const numberRegex = street.match(/\d+/);
+  const number = numberRegex ? numberRegex[0] : "";
   const name = street.replace(/[0-9]/g, "").trim();
   const capitalizedName = name
     .split(" ")
@@ -54,7 +56,24 @@ const displayStreet = street => {
 
   return `${capitalizedName}, ${number}`;
 };
+
 const displayName = ({ title, first, last }) =>
   `${capitalize(first)} ${capitalize(last)}`;
+
+ClientCard.propTypes = {
+  avatar: PropTypes.string,
+  name: PropTypes.object,
+  street: PropTypes.string,
+  postcode: PropTypes.number,
+  state: PropTypes.string
+};
+
+ClientCard.defaultProps = {
+  avatar: "",
+  name: { title: "", first: "", last: "" },
+  street: "",
+  postcode: null,
+  state: ""
+};
 
 export default ClientCard;

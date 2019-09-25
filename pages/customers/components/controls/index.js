@@ -11,7 +11,6 @@ const useStyles = makeStyles({
   container: {
     marginTop: "20px"
   },
-  root: {},
   stepperContainer: {
     justifyContent: "center"
   }
@@ -32,7 +31,6 @@ const Controls = ({ currentPage, totalPages = 1, setCurrentPage }) => {
           steps={totalPages}
           position="static"
           activeStep={activeStep}
-          className={classes.root}
           nextButton={
             <Button
               size="small"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Set } from "immutable";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 });
 
 const resultsPerPage = 10;
+
 const Customers = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -31,7 +33,6 @@ const Customers = ({ data }) => {
   const [customerFilters, setCustomerFilters] = useState(Set());
   const [results, setResults] = useState(data);
 
-  console.log("totalPages", totalPages);
   useEffect(() => {
     const from = currentPage * resultsPerPage;
     const to = from + resultsPerPage;
@@ -92,4 +93,11 @@ const Customers = ({ data }) => {
   );
 };
 
+Customers.propTypes = {
+  data: PropTypes.array
+};
+
+Customers.defaultProps = {
+  data: []
+};
 export default Customers;

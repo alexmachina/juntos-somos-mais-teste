@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import shortid from "shortid";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -30,6 +31,14 @@ const Results = ({ data }) => {
       </Grid>
     </Grid>
   );
+};
+
+Results.propTypes = {
+  data: PropTypes.array
+};
+
+Results.defaultProps = {
+  data: []
 };
 
 export default Results;
