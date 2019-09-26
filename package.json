@@ -27,5 +27,10 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "jest": "^24.9.0"
   }
 }
