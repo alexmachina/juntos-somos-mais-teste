@@ -1,6 +1,8 @@
 # Atomic
 App criado com *create-next-app*
-> yarn install && yarn dev
+
+## Docker
+> docker-compose up
 
 ## Ferramentas utilizadas
 - NextJs
