@@ -13,7 +13,7 @@ import rootReducer from "../store/reducers";
 
 import Header from "../components/header/index";
 import Customers from "./customers";
-import { fetchData } from "../store/api";
+import { fetchData } from "../store/customers/api";
 
 const useStyles = makeStyles({
   root: {

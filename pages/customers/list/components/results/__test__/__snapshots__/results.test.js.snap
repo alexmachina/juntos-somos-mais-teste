@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components Results Renders correctly 1`] = `
+<div
+  className="MuiGrid-root makeStyles-results-1"
+>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+  />
+</div>
+`;

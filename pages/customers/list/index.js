@@ -9,9 +9,9 @@ import UserTypeFilter from "./components/filters/userTypeFilter";
 import Results from "./components/results";
 import Filters from "./components/filters";
 import Controls from "./components/controls";
-import { fetchData } from "../../store/customers/api";
+import { fetchData } from "../../../store/customers/api";
 import fetch from "isomorphic-unfetch";
-import { applyAllFilters } from "../../store/customers/filters";
+import { applyAllFilters } from "../../../store/customers/filters";
 
 const useStyles = makeStyles({
   root: {},
@@ -100,4 +100,5 @@ Customers.propTypes = {
 Customers.defaultProps = {
   data: []
 };
+
 export default Customers;
