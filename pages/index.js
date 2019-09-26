@@ -12,7 +12,7 @@ import thunkMiddleware from "redux-thunk";
 import rootReducer from "../store/reducers";
 
 import Header from "../components/header/index";
-import Customers from "./customers";
+import Customers from "./customers/list";
 import { fetchData } from "../store/customers/api";
 
 const useStyles = makeStyles({
