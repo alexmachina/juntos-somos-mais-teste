@@ -1,8 +1,26 @@
 # Atomic
 App criado com *create-next-app*
 
-## Docker
+## Rodar a aplicação: 
 > docker-compose up
+
+## Rodar os testes:
+> nvm use && npm install && npm run test
+
+## Adicionais (pedidos na terça-feira)
+### Testes unitários de regras de negócio
+Adicionei os testes de regras de filtragem dentro da pasta **store**. Na pasta __test__ da raiz estão os
+testes de snapshot que estavam dentro de Pages e precisaram ser removidos por conta de uma convenção de build do Next.
+### Containerização da aplicação
+Criei o Dockerfile e o docker-compose.yml.
+### Definição de versão do NodeJS
+Basta rodar o comando *nvm use* para utilizar a versão correta do nodeJs para o projeto.
+Também está definida a versão no package.json
+### Layout com CSS (sem framework)
+A página de detalhes do cliente está desenvolvida sem o uso do MaterialUI.
+Como não tem muitas informações para mostrar sobre um único cliente e o objetivo dessa implementação
+é mostrar um pouco de CSS, repeti alguns itens no grid para demonstrar a responsividade.
+![](screenshots/mobile.png) ![](gifs/desktop.gif) ![](gifs/tablet.gif)
 
 ## Ferramentas utilizadas
 - NextJs
