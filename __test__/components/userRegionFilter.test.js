@@ -1,5 +1,5 @@
 import React from "react";
-import UserRegionFilter from "../userRegionFilter";
+import UserRegionFilter from "../../pages/customers/list/components/filters/userRegionFilter";
 import renderer from "react-test-renderer";
 
 describe("Components", () => {

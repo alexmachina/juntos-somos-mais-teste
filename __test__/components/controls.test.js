@@ -1,5 +1,5 @@
 import React from "react";
-import Controls from "../";
+import Controls from "../../pages/customers/list/components/controls";
 import renderer from "react-test-renderer";
 
 describe("Components", () => {

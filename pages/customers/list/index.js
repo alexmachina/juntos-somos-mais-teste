@@ -31,17 +31,21 @@ const Customers = ({ data }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [regionFilters, setRegionFilters] = useState(Set());
   const [customerFilters, setCustomerFilters] = useState(Set());
-  const [results, setResults] = useState(data);
+  const [results, setResults] = useState(Object.values(data));
 
   useEffect(() => {
     const from = currentPage * resultsPerPage;
     const to = from + resultsPerPage;
-    const filtered = applyAllFilters(data, regionFilters, customerFilters);
+    const filtered = applyAllFilters(
+      Object.values(data),
+      regionFilters,
+      customerFilters
+    );
     const nextResults = filtered.slice(from, to);
     const nextTotalPages = filtered.length / resultsPerPage;
     setResults(nextResults);
     setTotalPages(Math.ceil(nextTotalPages));
-  }, [regionFilters, currentPage, customerFilters]);
+  }, [regionFilters, currentPage, customerFilters, data]);
 
   const toggleRegionFilter = filter => {
     setCurrentPage(0);
@@ -94,11 +98,11 @@ const Customers = ({ data }) => {
 };
 
 Customers.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.object
 };
 
 Customers.defaultProps = {
-  data: []
+  data: {}
 };
 
 export default Customers;

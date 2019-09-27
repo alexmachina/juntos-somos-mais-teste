@@ -1,11 +1,11 @@
 import React from "react";
-import Filters from "../";
+import Results from "../../pages/customers/list/components/results/index";
 import renderer from "react-test-renderer";
 
 describe("Components", () => {
-  describe("Filters", () => {
+  describe("Results", () => {
     it("Renders correctly", () => {
-      const tree = renderer.create(<Filters />).toJSON();
+      const tree = renderer.create(<Results />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });

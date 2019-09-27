@@ -1,68 +1,22 @@
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunkMiddleware from "redux-thunk";
+import rootReducer from "./store/reducers";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const exampleInitialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0
-}
+const persistConfig = {
+  key: "primary",
+  storage,
+  whitelist: ["data"] // place to select which state you want to persist
+};
 
-export const actionTypes = {
-  TICK: 'TICK',
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  RESET: 'RESET'
-}
-
-// REDUCERS
-export const reducer = (state = exampleInitialState, action) => {
-  switch (action.type) {
-    case actionTypes.TICK:
-      return Object.assign({}, state, {
-        lastUpdate: action.ts,
-        light: !!action.light
-      })
-    case actionTypes.INCREMENT:
-      return Object.assign({}, state, {
-        count: state.count + 1
-      })
-    case actionTypes.DECREMENT:
-      return Object.assign({}, state, {
-        count: state.count - 1
-      })
-    case actionTypes.RESET:
-      return Object.assign({}, state, {
-        count: exampleInitialState.count
-      })
-    default:
-      return state
-  }
-}
-
-// ACTIONS
-export const serverRenderClock = () => {
-  return { type: actionTypes.TICK, light: false, ts: Date.now() }
-}
-export const startClock = () => {
-  return { type: actionTypes.TICK, light: true, ts: Date.now() }
-}
-
-export const incrementCount = () => {
-  return { type: actionTypes.INCREMENT }
-}
-
-export const decrementCount = () => {
-  return { type: actionTypes.DECREMENT }
-}
-
-export const resetCount = () => {
-  return { type: actionTypes.RESET }
-}
-
-export function initializeStore (initialState = exampleInitialState) {
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+const initialState = { data: {} };
+export function initializeStore() {
   return createStore(
-    reducer,
+    persistedReducer,
     initialState,
-    composeWithDevTools(applyMiddleware())
-  )
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
+  );
 }

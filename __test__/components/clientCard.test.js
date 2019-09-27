@@ -1,11 +1,11 @@
 import React from "react";
-import Results from "../index";
+import ClientCard from "../../pages/customers/list/components/results/components/clientCard";
 import renderer from "react-test-renderer";
 
 describe("Components", () => {
-  describe("Results", () => {
+  describe("ClientCard", () => {
     it("Renders correctly", () => {
-      const tree = renderer.create(<Results />).toJSON();
+      const tree = renderer.create(<ClientCard />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });

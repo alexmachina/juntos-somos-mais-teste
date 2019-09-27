@@ -1,11 +1,11 @@
 import React from "react";
-import Customers from "../";
+import UserTypeFilter from "../../pages/customers/list/components/filters";
 import renderer from "react-test-renderer";
 
 describe("Components", () => {
-  describe("Customers", () => {
+  describe("UserTypeFilter", () => {
     it("Renders correctly", () => {
-      const tree = renderer.create(<Customers />).toJSON();
+      const tree = renderer.create(<UserTypeFilter />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });

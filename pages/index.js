@@ -1,19 +1,14 @@
-import React from "react";
-import Head from "next/head";
+import React, { useEffect } from "react";
 import fetch from "isomorphic-unfetch";
-
+import { connect } from "react-redux";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/styles";
-
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from "redux-thunk";
-import rootReducer from "../store/reducers";
-
+import { setCustomers as setCustomersAction } from "../store/reducers";
 import Header from "../components/header/index";
 import Customers from "./customers/list";
 import { fetchData } from "../store/customers/api";
+import { List } from "immutable";
 
 const useStyles = makeStyles({
   root: {
@@ -22,41 +17,33 @@ const useStyles = makeStyles({
   }
 });
 
-const store = createStore(
-  rootReducer,
-  undefined,
-  applyMiddleware(thunkMiddleware)
-);
-
 const Home = ({ data }) => {
   const classes = useStyles();
   return (
-    <Provider store={store}>
-      <Head>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-      </Head>
-      <Container>
-        <Grid item xs={12}>
-          <Header />
-        </Grid>
-        <Grid item xs={12}>
-          <Customers data={data} />
-        </Grid>
-      </Container>
-    </Provider>
+    <Container>
+      <Grid item xs={12}>
+        <Header />
+      </Grid>
+      <Grid item xs={12}>
+        <Customers data={data} />
+      </Grid>
+    </Container>
   );
 };
 
-Home.getInitialProps = async () => {
-  const data = await fetchData();
-  return { data };
+const mapDispatchToProps = dispatch => ({
+  setCustomers: data => dispatch(setCustomersAction(data))
+});
+
+const mapStateToProps = state => ({ data: state.data });
+
+Home.getInitialProps = async ({ reduxStore }) => {
+  const serverData = await fetchData();
+  await reduxStore.dispatch(setCustomersAction(serverData));
+  return { serverData };
 };
 
-export default Home;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

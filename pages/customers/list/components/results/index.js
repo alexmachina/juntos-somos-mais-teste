@@ -19,6 +19,7 @@ const Results = ({ data }) => {
         {data.map(customer => (
           <Grid key={shortid.generate()} item xs={12} md={6} lg={4}>
             <ClientCard
+              id={customer.id}
               avatar={customer.picture.large}
               name={customer.name}
               street={customer.location.street}
