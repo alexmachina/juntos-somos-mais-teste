@@ -20,7 +20,8 @@ Também está definida a versão no package.json
 A página de detalhes do cliente está desenvolvida sem o uso do MaterialUI.
 Como não tem muitas informações para mostrar sobre um único cliente e o objetivo dessa implementação
 é mostrar um pouco de CSS, repeti alguns itens no grid para demonstrar a responsividade.
-![](screenshots/mobile.png) ![](gifs/desktop.gif) ![](gifs/tablet.gif)
+
+- ![](screenshots/mobile.png)
 
 ## Ferramentas utilizadas
 - NextJs
